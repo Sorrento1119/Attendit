@@ -1,0 +1,10 @@
+{
+  "name": "AttendIt",
+  "description": "Smart Attendance & Anti-Proxy Engine with live rotating QR, real-time analytics, and teacher dashboard.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
