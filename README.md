@@ -127,21 +127,21 @@ To verify and test production deployment locally:
 You can log in immediately using any of the following pre-configured test profiles or use the **1-Click Test Login** buttons in the authentication modal:
 
 ### Faculty / Teacher Account
-- **Email**: `anjali.sharma@smartcampus.edu`
+- **Email**: `anjali.sharma@attendit.edu`
 - **Password**: `teacher123`
 - **Role**: Professor / Faculty (Computer Science & Engineering)
 
 ### Student Accounts
 - **Student 1**:
-  - **Email / Roll No**: `aditya.verma.001@smartcampus.edu` or `22CS001`
+  - **Email / Roll No**: `aditya.verma.001@attendit.edu` or `22CS001`
   - **Password**: `student123`
   - **Class**: CSE-A (Semester 4)
 - **Student 2**:
-  - **Email / Roll No**: `sneha.patil.002@smartcampus.edu` or `22CS002`
+  - **Email / Roll No**: `sneha.patil.002@attendit.edu` or `22CS002`
   - **Password**: `student123`
   - **Class**: CSE-A (Semester 4)
 - **Student 3**:
-  - **Email / Roll No**: `vikram.patel.009@smartcampus.edu` or `22CS009`
+  - **Email / Roll No**: `vikram.patel.009@attendit.edu` or `22CS009`
   - **Password**: `student123`
   - **Class**: CSE-B (Semester 4)
 

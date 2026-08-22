@@ -8,7 +8,7 @@ import QRCode from 'qrcode';
 import { createServer as createViteServer } from 'vite';
 
 const PORT = 3000;
-const JWT_SECRET = process.env.JWT_SECRET || 'smartcampus-sih-2025-super-secret-key';
+const JWT_SECRET = process.env.JWT_SECRET || 'attendit-auth-super-secret-key';
 const QR_ROTATION_SECONDS = 15;
 
 // Mock Student Profiles
@@ -29,7 +29,7 @@ const mockStudentDirectory: MockStudent[] = [
     id: 'std-class-cse-a-1',
     name: 'Aditya Verma',
     rollNo: '22CS001',
-    email: 'aditya.verma.001@smartcampus.edu',
+    email: 'aditya.verma.001@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-a',
     className: 'CSE-A (Semester 4)',
@@ -40,7 +40,7 @@ const mockStudentDirectory: MockStudent[] = [
     id: 'std-class-cse-a-2',
     name: 'Sneha Patil',
     rollNo: '22CS002',
-    email: 'sneha.patil.002@smartcampus.edu',
+    email: 'sneha.patil.002@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-a',
     className: 'CSE-A (Semester 4)',
@@ -51,7 +51,7 @@ const mockStudentDirectory: MockStudent[] = [
     id: 'std-class-cse-a-3',
     name: 'Rohan Mehta',
     rollNo: '22CS003',
-    email: 'rohan.mehta.003@smartcampus.edu',
+    email: 'rohan.mehta.003@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-a',
     className: 'CSE-A (Semester 4)',
@@ -62,7 +62,7 @@ const mockStudentDirectory: MockStudent[] = [
     id: 'std-class-cse-a-4',
     name: 'Kavya Singh',
     rollNo: '22CS004',
-    email: 'kavya.singh.004@smartcampus.edu',
+    email: 'kavya.singh.004@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-a',
     className: 'CSE-A (Semester 4)',
@@ -73,7 +73,7 @@ const mockStudentDirectory: MockStudent[] = [
     id: 'std-class-cse-a-5',
     name: 'Arjun Nair',
     rollNo: '22CS005',
-    email: 'arjun.nair.005@smartcampus.edu',
+    email: 'arjun.nair.005@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-a',
     className: 'CSE-A (Semester 4)',
@@ -84,7 +84,7 @@ const mockStudentDirectory: MockStudent[] = [
     id: 'std-class-cse-b-1',
     name: 'Vikram Patel',
     rollNo: '22CS009',
-    email: 'vikram.patel.009@smartcampus.edu',
+    email: 'vikram.patel.009@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1492562080023-ab3db95bfbce?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-b',
     className: 'CSE-B (Semester 4)',
@@ -95,7 +95,7 @@ const mockStudentDirectory: MockStudent[] = [
     id: 'std-class-it-a-1',
     name: 'Diya Menon',
     rollNo: '22IT016',
-    email: 'diya.menon.016@smartcampus.edu',
+    email: 'diya.menon.016@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?q=80&w=120&auto=format&fit=crop',
     classId: 'class-it-a',
     className: 'IT-A (Semester 6)',
@@ -149,7 +149,7 @@ interface MockTeacher {
 const mockTeacher: MockTeacher = {
   id: 'teacher-101',
   name: 'Prof. Anjali Sharma',
-  email: 'anjali.sharma@smartcampus.edu',
+  email: 'anjali.sharma@attendit.edu',
   passwordHash: bcrypt.hashSync('teacher123', 8),
   department: 'Computer Science & Engineering',
   branch: 'Computer Science & Engineering (CSE)',
@@ -310,7 +310,7 @@ let mockLowAttendanceStudents = [
     id: 'std-low-1',
     rollNo: '22CS013',
     name: 'Karan Malhotra',
-    email: 'karan.malhotra.013@smartcampus.edu',
+    email: 'karan.malhotra.013@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-a',
     className: 'CSE-A (Semester 4)',
@@ -327,7 +327,7 @@ let mockLowAttendanceStudents = [
     id: 'std-low-2',
     rollNo: '22CS007',
     name: 'Rahul Deshmukh',
-    email: 'rahul.deshmukh.007@smartcampus.edu',
+    email: 'rahul.deshmukh.007@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-a',
     className: 'CSE-A (Semester 4)',
@@ -344,7 +344,7 @@ let mockLowAttendanceStudents = [
     id: 'std-low-3',
     rollNo: '22CS019',
     name: 'Rohan Gupta',
-    email: 'rohan.gupta.019@smartcampus.edu',
+    email: 'rohan.gupta.019@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=120&auto=format&fit=crop',
     classId: 'class-cse-b',
     className: 'CSE-B (Semester 4)',
@@ -361,7 +361,7 @@ let mockLowAttendanceStudents = [
     id: 'std-low-4',
     rollNo: '22IT008',
     name: 'Aniket Verma',
-    email: 'aniket.verma.008@smartcampus.edu',
+    email: 'aniket.verma.008@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=120&auto=format&fit=crop',
     classId: 'class-it-a',
     className: 'IT-A (Semester 6)',
@@ -378,7 +378,7 @@ let mockLowAttendanceStudents = [
     id: 'std-low-5',
     rollNo: '22EC014',
     name: 'Tanmay Shinde',
-    email: 'tanmay.shinde.014@smartcampus.edu',
+    email: 'tanmay.shinde.014@attendit.edu',
     avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=120&auto=format&fit=crop',
     classId: 'class-ece-a',
     className: 'ECE-A (Semester 4)',
@@ -510,7 +510,7 @@ function generateStudentsForClass(classId: string, count: number) {
       id: `std-${classId}-${i + 1}`,
       rollNo: `${rollPrefix}${rollIndex}`,
       name: i < studentTemplates.length ? template.name : `${template.name} (${i + 1})`,
-      email: `${template.name.toLowerCase().replace(/\s+/g, '.')}.${rollIndex}@smartcampus.edu`,
+      email: `${template.name.toLowerCase().replace(/\s+/g, '.')}.${rollIndex}@attendit.edu`,
       avatar: template.avatar,
       classId,
       overallAttendance: template.attendance,
@@ -540,7 +540,7 @@ async function generateDynamicQrPayload(sessionId: string, sessionCode: string) 
   );
 
   const qrDataString = JSON.stringify({
-    app: 'SmartCampus',
+    app: 'AttendIt',
     sessionId,
     sessionCode,
     token,
@@ -644,7 +644,7 @@ async function startServer() {
   app.get('/api/health', (req, res) => {
     res.json({
       status: 'ok',
-      service: 'SmartCampus Attendance Engine',
+      service: 'AttendIt Attendance Engine',
       realtime: 'Socket.IO Active',
       time: new Date().toISOString(),
     });
@@ -1263,7 +1263,7 @@ async function startServer() {
         // Check if rawQrData is a URL containing query parameters
         if (trimmed.startsWith('http://') || trimmed.startsWith('https://') || trimmed.includes('?')) {
           try {
-            const urlObj = new URL(trimmed.startsWith('http') ? trimmed : `https://smartcampus.local/${trimmed}`);
+            const urlObj = new URL(trimmed.startsWith('http') ? trimmed : `https://attendit.local/${trimmed}`);
             const queryToken = urlObj.searchParams.get('token') || urlObj.searchParams.get('t');
             const scanDataParam = urlObj.searchParams.get('scanData');
             if (queryToken) {
@@ -1529,7 +1529,7 @@ async function startServer() {
   }
 
   server.listen(PORT, '0.0.0.0', () => {
-    console.log(`SmartCampus Attendance Engine Server running on http://0.0.0.0:${PORT}`);
+    console.log(`AttendIt Attendance Engine Server running on http://0.0.0.0:${PORT}`);
   });
 }
 

@@ -37,7 +37,7 @@ const DEMO_CREDENTIALS: DemoCredential[] = [
     role: 'teacher',
     name: 'Prof. Anjali Sharma',
     title: 'Faculty / Professor',
-    email: 'anjali.sharma@smartcampus.edu',
+    email: 'anjali.sharma@attendit.edu',
     password: 'teacher123',
     department: 'Computer Science & Eng.',
     avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?q=80&w=120&auto=format&fit=crop',
@@ -47,7 +47,7 @@ const DEMO_CREDENTIALS: DemoCredential[] = [
     role: 'student',
     name: 'Aditya Verma',
     title: 'Student (CSE-A)',
-    email: 'aditya.verma.001@smartcampus.edu',
+    email: 'aditya.verma.001@attendit.edu',
     rollNo: '22CS001',
     password: 'student123',
     department: 'Computer Science',
@@ -58,7 +58,7 @@ const DEMO_CREDENTIALS: DemoCredential[] = [
     role: 'student',
     name: 'Sneha Patil',
     title: 'Student (CSE-A)',
-    email: 'sneha.patil.002@smartcampus.edu',
+    email: 'sneha.patil.002@attendit.edu',
     rollNo: '22CS002',
     password: 'student123',
     department: 'Computer Science',
@@ -69,7 +69,7 @@ const DEMO_CREDENTIALS: DemoCredential[] = [
     role: 'student',
     name: 'Vikram Patel',
     title: 'Student (CSE-B)',
-    email: 'vikram.patel.009@smartcampus.edu',
+    email: 'vikram.patel.009@attendit.edu',
     rollNo: '22CS009',
     password: 'student123',
     department: 'Computer Science',
@@ -80,7 +80,7 @@ const DEMO_CREDENTIALS: DemoCredential[] = [
     role: 'student',
     name: 'Diya Menon',
     title: 'Student (IT-A)',
-    email: 'diya.menon.016@smartcampus.edu',
+    email: 'diya.menon.016@attendit.edu',
     rollNo: '22IT016',
     password: 'student123',
     department: 'Information Tech',
@@ -95,7 +95,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [authRole, setAuthRole] = useState<'teacher' | 'student'>('teacher');
-  const [email, setEmail] = useState('anjali.sharma@smartcampus.edu');
+  const [email, setEmail] = useState('anjali.sharma@attendit.edu');
   const [password, setPassword] = useState('teacher123');
   const [rollNo, setRollNo] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -105,11 +105,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     setAuthRole(defaultRole);
     setError(null);
     if (defaultRole === 'teacher') {
-      setEmail('anjali.sharma@smartcampus.edu');
+      setEmail('anjali.sharma@attendit.edu');
       setPassword('teacher123');
       setRollNo('');
     } else {
-      setEmail('aditya.verma.001@smartcampus.edu');
+      setEmail('aditya.verma.001@attendit.edu');
       setPassword('student123');
       setRollNo('22CS001');
     }
@@ -120,11 +120,11 @@ export const LandingPage: React.FC<LandingPageProps> = ({
     setAuthRole(role);
     setError(null);
     if (role === 'teacher') {
-      setEmail('anjali.sharma@smartcampus.edu');
+      setEmail('anjali.sharma@attendit.edu');
       setPassword('teacher123');
       setRollNo('');
     } else {
-      setEmail('aditya.verma.001@smartcampus.edu');
+      setEmail('aditya.verma.001@attendit.edu');
       setPassword('student123');
       setRollNo('22CS001');
     }
@@ -235,7 +235,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
           <div className="w-8 h-8 rounded-xl bg-slate-900 flex items-center justify-center text-white shadow-xs">
             <QrCode className="w-4 h-4" />
           </div>
-          <span className="font-bold text-lg tracking-tight text-slate-900">smartcampus</span>
+          <span className="font-bold text-lg tracking-tight text-slate-900">attendit</span>
         </div>
 
         {/* Right Navigation Controls */}
@@ -256,7 +256,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
         <div className="inline-flex items-center space-x-1.5 mb-6 text-xs font-medium text-slate-600 bg-white/80 border border-slate-200/80 px-3.5 py-1.5 rounded-full shadow-xs backdrop-blur-xs">
           <span>A modern attendance ecosystem from</span>
           <span className="font-semibold text-slate-900 underline underline-offset-4 decoration-slate-300">
-            SmartCampus
+            AttendIt
           </span>
         </div>
 
@@ -308,7 +308,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
 
       {/* Footer */}
       <footer className="relative z-10 w-full max-w-7xl mx-auto px-6 sm:px-10 py-6 text-center border-t border-slate-200/60 text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-2">
-        <p>© {new Date().getFullYear()} SmartCampus System. Anti-Proxy Dynamic QR Verification.</p>
+        <p>© {new Date().getFullYear()} AttendIt System. Anti-Proxy Dynamic QR Verification.</p>
         <p className="text-[11px] text-slate-500">Uniform typography & layout standard.</p>
       </footer>
 
@@ -330,7 +330,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                   <QrCode className="w-4 h-4" />
                 </div>
                 <div>
-                  <h2 className="text-base font-bold text-slate-900 leading-tight">SmartCampus Portal</h2>
+                  <h2 className="text-base font-bold text-slate-900 leading-tight">AttendIt Portal</h2>
                   <p className="text-[11px] text-slate-500 font-medium">Select your role to sign in</p>
                 </div>
               </div>
@@ -397,7 +397,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                               required
-                              placeholder="faculty@smartcampus.edu"
+                              placeholder="faculty@attendit.edu"
                               className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all"
                             />
                           </div>
@@ -431,7 +431,7 @@ export const LandingPage: React.FC<LandingPageProps> = ({
                               value={email}
                               onChange={(e) => setEmail(e.target.value)}
                               required
-                              placeholder="22CS001 or student@smartcampus.edu"
+                              placeholder="22CS001 or student@attendit.edu"
                               className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-2xl text-xs sm:text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-slate-900 focus:bg-white transition-all"
                             />
                           </div>

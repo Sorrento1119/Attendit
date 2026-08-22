@@ -8,7 +8,7 @@ interface TeacherLoginProps {
 }
 
 export const TeacherLogin: React.FC<TeacherLoginProps> = ({ onLoginSuccess, onOpenStudentScanner }) => {
-  const [email, setEmail] = useState('anjali.sharma@smartcampus.edu');
+  const [email, setEmail] = useState('anjali.sharma@attendit.edu');
   const [password, setPassword] = useState('teacher123');
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -39,13 +39,13 @@ export const TeacherLogin: React.FC<TeacherLoginProps> = ({ onLoginSuccess, onOp
   };
 
   const handleDemoLogin = () => {
-    setEmail('anjali.sharma@smartcampus.edu');
+    setEmail('anjali.sharma@attendit.edu');
     setPassword('teacher123');
     setIsLoading(true);
     fetch('/api/auth/login', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'anjali.sharma@smartcampus.edu', password: 'teacher123' }),
+      body: JSON.stringify({ email: 'anjali.sharma@attendit.edu', password: 'teacher123' }),
     })
       .then((res) => res.json())
       .then((data) => {
@@ -143,7 +143,7 @@ export const TeacherLogin: React.FC<TeacherLoginProps> = ({ onLoginSuccess, onOp
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     required
-                    placeholder="faculty@smartcampus.edu"
+                    placeholder="faculty@attendit.edu"
                     className="w-full pl-10 pr-4 py-2.5 bg-slate-50/70 border border-slate-200 rounded-xl text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 transition-all"
                   />
                 </div>

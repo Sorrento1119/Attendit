@@ -51,7 +51,7 @@ export default function App() {
     });
 
     socketClient.on('connect', () => {
-      console.log('Connected to SmartCampus Socket.IO Server');
+      console.log('Connected to AttendIt Socket.IO Server');
     });
 
     socketClient.on('session:sync', (sessionData: AttendanceSession) => {

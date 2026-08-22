@@ -115,7 +115,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ loggedInStud
         if (data.students && data.students.length > 0) {
           setStudents(data.students);
           // Check localStorage for previously selected roll
-          const savedRoll = localStorage.getItem('smartcampus_student_roll');
+          const savedRoll = localStorage.getItem('attendit_student_roll');
           const matched = savedRoll ? data.students.find((s: StudentData) => s.rollNo === savedRoll) : null;
           const initial = matched || data.students[0];
           setSelectedStudent(initial);
@@ -138,7 +138,7 @@ export const StudentDashboard: React.FC<StudentDashboardProps> = ({ loggedInStud
   // Handle switching active student test profile
   const handleSelectStudent = (std: StudentData) => {
     setSelectedStudent(std);
-    localStorage.setItem('smartcampus_student_roll', std.rollNo);
+    localStorage.setItem('attendit_student_roll', std.rollNo);
     setVerificationResult(null);
     setIsSelectingProfile(false);
     fetchCurrentClassData(std.id);

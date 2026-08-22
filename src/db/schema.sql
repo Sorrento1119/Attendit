@@ -1,4 +1,4 @@
--- Smart Attendance & Learning Companion (SmartCampus)
+-- Smart Attendance & Learning Companion (AttendIt)
 -- PostgreSQL / Supabase Database Schema
 
 -- 1. Users & Roles (Teachers, Students, Admins)
