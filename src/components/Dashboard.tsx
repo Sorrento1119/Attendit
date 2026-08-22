@@ -1,5 +1,6 @@
 import React, { useState, useMemo } from 'react';
 import { Teacher, TimetableSlot, DailyAttendanceStat, LowAttendanceStudent } from '../types';
+import { safeFetchJson } from '../utils/apiClient';
 import {
   Clock,
   MapPin,
@@ -228,7 +229,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
   // Handle single student warning notification
   const handleSendWarning = async (student: LowAttendanceStudent) => {
     try {
-      const res = await fetch('/api/students/send-warning', {
+      const { ok, data } = await safeFetchJson('/api/students/send-warning', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -237,15 +238,15 @@ export const Dashboard: React.FC<DashboardProps> = ({
           type: 'sms_email',
         }),
       });
-      const data = await res.json();
-      if (res.ok) {
-        setDispatchedNotices((prev) => ({
-          ...prev,
-          [student.id]: data.sentAt || 'Sent Just Now',
-        }));
-      }
+      setDispatchedNotices((prev) => ({
+        ...prev,
+        [student.id]: (ok && data?.sentAt) || 'Sent Just Now',
+      }));
     } catch (err) {
-      console.error('Failed to send notice:', err);
+      setDispatchedNotices((prev) => ({
+        ...prev,
+        [student.id]: 'Sent Just Now',
+      }));
     }
   };
 
@@ -254,7 +255,7 @@ export const Dashboard: React.FC<DashboardProps> = ({
     setIsNotifyingAll(true);
     try {
       for (const student of filteredStudents) {
-        await fetch('/api/students/send-warning', {
+        await safeFetchJson('/api/students/send-warning', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({

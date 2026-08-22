@@ -5,8 +5,20 @@ export interface Teacher {
   department: string;
   branch?: string;
   avatar: string;
-  designation: string;
-  facultyCode: string;
+  designation?: string;
+  facultyCode?: string;
+  activeSubject?: string;
+  activeRoom?: string;
+  stats?: {
+    todayClasses?: number;
+    totalClassesToday?: number;
+    activeSessions?: number;
+    totalStudents?: number;
+    avgAttendance?: number;
+    averageAttendancePercent?: number;
+    proxyAlertsFlagged?: number;
+    [key: string]: any;
+  };
   timings?: {
     start: string;
     finish: string;
@@ -25,24 +37,38 @@ export interface BranchItem {
 export interface DivisionItem {
   id: string;
   name: string;
+  code?: string;
+  capacity?: number;
 }
 
 export interface SemesterItem {
   id: string;
   semesterNumber: number;
   label: string;
+  number?: number;
+  name?: string;
+  academicYear?: string;
 }
 
 export interface ClassItem {
   id: string;
-  code: string;
+  code?: string;
   name: string;
-  department: string;
+  department?: string;
   branch?: string;
-  semester: number;
-  section: string;
+  branchId?: string;
+  branchName?: string;
+  semester?: number;
+  semesterId?: string;
+  semesterName?: string;
+  section?: string;
+  divisionId?: string;
+  divisionName?: string;
   totalStudents: number;
-  defaultRoom: string;
+  defaultRoom?: string;
+  currentRoom?: string;
+  batchYear?: number;
+  subjectIds?: string[];
 }
 
 export interface SubjectItem {
@@ -50,9 +76,10 @@ export interface SubjectItem {
   code: string;
   name: string;
   credits: number;
-  department: string;
+  department?: string;
   branch?: string;
   colorTheme?: string;
+  type?: string;
 }
 
 export interface LowAttendanceStudent {
@@ -66,14 +93,16 @@ export interface LowAttendanceStudent {
   className?: string;
   branch: string;
   section?: string;
-  semester: number;
+  semester?: number;
   overallAttendance: number;
   missedLectures?: number;
   totalLectures?: number;
   totalClasses?: number;
   attendedClasses?: number;
+  consecutiveAbsences?: number;
   parentEmail?: string;
   parentPhone?: string;
+  status?: string;
   statusRisk?: 'critical' | 'warning' | 'borderline';
   lastAttended?: string;
 }
@@ -81,16 +110,22 @@ export interface LowAttendanceStudent {
 export interface TimetableSlot {
   id: string;
   classId: string;
-  className: string;
+  className?: string;
+  class?: string;
   subjectId: string;
-  subjectName: string;
-  subjectCode: string;
-  startTime: string;
-  endTime: string;
+  subjectName?: string;
+  subject?: string;
+  subjectCode?: string;
+  startTime?: string;
+  endTime?: string;
+  time?: string;
   room: string;
-  dayOfWeek: string;
+  dayOfWeek?: string;
+  day?: string;
+  status?: string;
   isToday?: boolean;
   isCompleted?: boolean;
+  attendancePercent?: number;
   attendanceCount?: {
     present: number;
     total: number;
@@ -102,9 +137,11 @@ export interface TimetableSlot {
 export interface DailyAttendanceStat {
   day: string;
   date: string;
-  percentage: number;
-  totalPresent: number;
-  totalEnrolled: number;
+  percentage?: number;
+  attendance?: number;
+  totalPresent?: number;
+  totalEnrolled?: number;
+  total?: number;
 }
 
 export interface Student {
@@ -114,27 +151,30 @@ export interface Student {
   email: string;
   avatar: string;
   classId: string;
+  className?: string;
+  enrolledSubjectIds?: string[];
   overallAttendance: number;
-  status: 'present' | 'flagged' | 'absent';
+  status?: 'present' | 'flagged' | 'absent';
   markedAt?: string;
   flagReason?: string;
   verificationMethod?: string;
 }
 
 export interface AttendanceSession {
-  id: string;
+  id?: string;
+  sessionId?: string;
   sessionCode: string;
   classId: string;
   className: string;
   subjectId: string;
   subjectName: string;
-  subjectCode: string;
+  subjectCode?: string;
   room: string;
-  timeSlot: string;
-  teacherId: string;
-  teacherName: string;
+  timeSlot?: string;
+  teacherId?: string;
+  teacherName?: string;
   startedAt: string;
-  status: 'active' | 'ended';
+  status?: 'active' | 'ended';
   qrCodeUrl: string;
   qrExpiresIn: number;
   qrTotalDuration: number;
@@ -143,7 +183,9 @@ export interface AttendanceSession {
     present: number;
     flagged: number;
     absent: number;
-    total: number;
+    total?: number;
+    totalStudents?: number;
+    attendanceRate?: number;
   };
   students: Student[];
 }
