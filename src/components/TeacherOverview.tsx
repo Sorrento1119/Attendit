@@ -20,7 +20,7 @@ interface TeacherOverviewProps {
   classes: ClassItem[];
   subjects: SubjectItem[];
   timetable: TimetableSlot[];
-  onStartSession: (classId: string, subjectId: string, room: string) => void;
+  onStartSession: (classId: string, subjectId: string, room: string, metadata?: any) => void;
   onGoToSelector: () => void;
 }
 
@@ -160,7 +160,17 @@ export const TeacherOverview: React.FC<TeacherOverviewProps> = ({
                     {slot.subjectCode}
                   </span>
                   <button
-                    onClick={() => onStartSession(slot.classId, slot.subjectId, slot.room)}
+                    onClick={() =>
+                      onStartSession(slot.classId, slot.subjectId, slot.room, {
+                        className: slot.className,
+                        subjectName: slot.subjectName,
+                        subjectCode: slot.subjectCode,
+                        timeSlot: `${slot.startTime} - ${slot.endTime}`,
+                        branch: slot.branch,
+                        semester: slot.semester,
+                        section: slot.division,
+                      })
+                    }
                     className="px-3.5 py-1.5 bg-indigo-600 hover:bg-indigo-700 text-white rounded-xl text-xs font-bold transition-all flex items-center space-x-1.5 shadow-2xs cursor-pointer"
                   >
                     <Play className="w-3 h-3 fill-white" />

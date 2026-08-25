@@ -158,6 +158,9 @@ export interface Student {
   markedAt?: string;
   flagReason?: string;
   verificationMethod?: string;
+  editReason?: string;
+  editedAt?: string;
+  editedBy?: string;
 }
 
 export interface AttendanceSession {
@@ -200,3 +203,146 @@ export interface AttendanceEventPayload {
     total: number;
   };
 }
+
+export interface StudentOnboardingProfile {
+  studentId: string;
+  careerGoal: string; // e.g., 'Full Stack Developer', 'Data Scientist', 'AI/ML Engineer'
+  interests: string[];
+  strongSubjects: string[];
+  weakSubjects: string[];
+  learningStyle: 'hands_on' | 'quizzes' | 'video' | 'notes';
+  freeTimeMinutes: number; // e.g., 15, 30, 45, 60
+  xp: number;
+  streakDays: number;
+  completedActivitiesCount: number;
+  lastActivityDate?: string;
+  badges?: string[];
+}
+
+export interface FreePeriodActivity {
+  id: string;
+  title: string;
+  description: string;
+  subjectId: string;
+  subjectName: string;
+  durationMinutes: number;
+  category: 'Skill Dev' | 'Revision' | 'Project Lab' | 'Quiz Challenge';
+  difficulty: 'Beginner' | 'Intermediate' | 'Advanced';
+  nepCreditLabel: string; // e.g., 'Counts toward Skill Enhancement Credit (SEC-202)'
+  xpReward: number;
+  tags: string[];
+  matchReasons?: {
+    weakSubjectMatched?: boolean;
+    careerGoalMatched?: boolean;
+    timeFitMatched?: boolean;
+    learningStyleMatched?: boolean;
+    explanation: string;
+  };
+  quizQuestions?: {
+    question: string;
+    options: string[];
+    correctIndex: number;
+    explanation: string;
+  }[];
+}
+
+export interface GamificationBadge {
+  id: string;
+  name: string;
+  description: string;
+  icon: string;
+  category: 'streak' | 'xp' | 'attendance' | 'skill';
+  unlocked: boolean;
+  unlockedAt?: string;
+  progressPercent: number;
+  requirement: string;
+}
+
+export interface LeaderboardEntry {
+  rank: number;
+  id: string;
+  name: string;
+  rollNo: string;
+  avatar: string;
+  className: string;
+  xp: number;
+  streakDays: number;
+  badgesCount: number;
+  attendancePercent: number;
+  isCurrentUser?: boolean;
+}
+
+export interface AdminAnalyticsData {
+  kpis: {
+    totalStudents: number;
+    todayAttendancePercent: number;
+    attendanceDeltaPercent: number;
+    freePeriodUsagePercent: number;
+    studentsAtRiskCount: number;
+  };
+  earlyWarningStudents: {
+    id: string;
+    name: string;
+    rollNo: string;
+    branch: string;
+    semester: number;
+    attendanceLastWeek: number;
+    attendanceThisWeek: number;
+    deltaPercent: number;
+    riskCategory: 'High Risk (>15% drop)' | 'Moderate Risk' | 'Critical Threshold';
+    suggestedAction: string;
+  }[];
+  weeklyTrends: {
+    day: string;
+    cse: number;
+    it: number;
+    aids: number;
+    ece: number;
+    overall: number;
+  }[];
+  departmentBreakdown: {
+    department: string;
+    code: string;
+    enrolled: number;
+    present: number;
+    attendancePercent: number;
+    freePeriodActivePercent: number;
+  }[];
+  freePeriodUsage: {
+    skillDevelopment: number;
+    revision: number;
+    projectLabs: number;
+    idle: number;
+  };
+  topRequestedSkills: {
+    skill: string;
+    demandPercent: number;
+    category: string;
+  }[];
+  careerCounselorInsights: {
+    title: string;
+    statistic: string;
+    description: string;
+    recommendation: string;
+  }[];
+}
+
+export interface OfflineAttendanceQueueItem {
+  id: string;
+  timestamp: string;
+  studentId: string;
+  rollNo: string;
+  studentName: string;
+  classId?: string;
+  subjectId?: string;
+  rawQrData: string;
+  coordinates?: {
+    latitude: number;
+    longitude: number;
+    accuracy?: number;
+  };
+  deviceInfo: string;
+  verificationPassed: boolean;
+  syncStatus: 'pending' | 'syncing' | 'synced' | 'failed';
+}
+

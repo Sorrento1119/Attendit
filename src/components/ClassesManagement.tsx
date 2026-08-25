@@ -26,7 +26,7 @@ interface ClassesManagementProps {
   branches?: BranchItem[];
   divisions?: DivisionItem[];
   semesters?: SemesterItem[];
-  onStartSession: (classId: string, subjectId: string, room: string) => void;
+  onStartSession: (classId: string, subjectId: string, room: string, metadata?: any) => void;
   onClassesUpdated?: (updatedClasses: ClassItem[]) => void;
   onSubjectsUpdated?: (updatedSubjects: SubjectItem[]) => void;
   onBranchesUpdated?: (updatedBranches: BranchItem[]) => void;
@@ -150,12 +150,29 @@ export const ClassesManagement: React.FC<ClassesManagementProps> = ({
 
   const handleStartSessionClick = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!matchedClass && classesList.length === 0) return;
-    const classIdToUse = matchedClass ? matchedClass.id : classesList[0]?.id;
-    const subjectIdToUse = selectedSubjectId || subjectsList[0]?.id;
-    if (!classIdToUse || !subjectIdToUse) return;
+    const targetSubject = subjectsList.find((s) => s.id === selectedSubjectId) || subjectsList[0];
+    const targetClass = matchedClass || {
+      id: `class-${Date.now()}`,
+      code: `${selectedBranch.substring(0, 3).toUpperCase()}-${selectedDivision}`,
+      name: `${selectedBranch} - Div ${selectedDivision} (Sem ${selectedSemester})`,
+      department: selectedBranch,
+      branch: selectedBranch,
+      semester: Number(selectedSemester),
+      section: selectedDivision,
+      totalStudents: 40,
+      defaultRoom: roomNumber || 'Room 301',
+    };
 
-    onStartSession(classIdToUse, subjectIdToUse, roomNumber || 'Room 301');
+    onStartSession(targetClass.id, targetSubject?.id || 'sub-ds', roomNumber || targetClass.defaultRoom || 'Room 301', {
+      className: targetClass.name,
+      classCode: targetClass.code,
+      totalStudents: targetClass.totalStudents,
+      branch: targetClass.branch || selectedBranch,
+      semester: targetClass.semester || Number(selectedSemester),
+      section: targetClass.section || selectedDivision,
+      subjectName: targetSubject?.name,
+      subjectCode: targetSubject?.code,
+    });
   };
 
   // ====================================================
@@ -833,7 +850,30 @@ export const ClassesManagement: React.FC<ClassesManagementProps> = ({
                       <td className="py-3 px-4 font-mono font-semibold text-slate-800">{item.totalStudents}</td>
                       <td className="py-3 px-4 text-slate-600">{item.defaultRoom}</td>
                       <td className="py-3 px-4 text-right">
-                        <div className="flex items-center justify-end space-x-1">
+                        <div className="flex items-center justify-end space-x-1.5">
+                          <button
+                            onClick={() => {
+                              const matchSub =
+                                subjectsList.find(
+                                  (s) => s.branch === item.branch || (s.department && item.department && item.department.includes(s.department))
+                                ) || subjectsList[0];
+                              onStartSession(item.id, matchSub?.id || 'sub-ds', item.defaultRoom || 'Room 301', {
+                                className: item.name,
+                                classCode: item.code,
+                                totalStudents: item.totalStudents,
+                                branch: item.branch,
+                                semester: item.semester,
+                                section: item.section,
+                                subjectName: matchSub?.name,
+                                subjectCode: matchSub?.code,
+                              });
+                            }}
+                            className="px-2.5 py-1 text-[11px] font-bold text-white bg-slate-900 hover:bg-slate-800 rounded-lg transition-colors cursor-pointer flex items-center space-x-1 shadow-xs"
+                            title="Start live session immediately"
+                          >
+                            <Play className="w-3 h-3 fill-white" />
+                            <span>Start Live</span>
+                          </button>
                           <button
                             onClick={() => {
                               setSelectedBranch(item.branch || item.department);

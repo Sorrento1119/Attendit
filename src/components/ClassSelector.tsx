@@ -6,7 +6,7 @@ interface ClassSelectorProps {
   classes: ClassItem[];
   subjects: SubjectItem[];
   timetable: TimetableSlot[];
-  onStartSession: (classId: string, subjectId: string, room: string) => Promise<void>;
+  onStartSession: (classId: string, subjectId: string, room: string, metadata?: any) => Promise<void> | void;
   isLoading?: boolean;
 }
 
@@ -36,12 +36,29 @@ export const ClassSelector: React.FC<ClassSelectorProps> = ({
     setSelectedClassId(slot.classId);
     setSelectedSubjectId(slot.subjectId);
     setRoom(slot.room);
-    onStartSession(slot.classId, slot.subjectId, slot.room);
+    onStartSession(slot.classId, slot.subjectId, slot.room, {
+      className: slot.className,
+      classCode: slot.subjectCode,
+      subjectName: slot.subjectName,
+      subjectCode: slot.subjectCode,
+      timeSlot: `${slot.startTime} - ${slot.endTime}`,
+    });
   };
 
   const handleStart = () => {
     if (!selectedClassId || !selectedSubjectId) return;
-    onStartSession(selectedClassId, selectedSubjectId, room);
+    const cls = classes.find((c) => c.id === selectedClassId) || selectedClass;
+    const sub = subjects.find((s) => s.id === selectedSubjectId) || selectedSubject;
+    onStartSession(selectedClassId, selectedSubjectId, room, {
+      className: cls?.name,
+      classCode: cls?.code,
+      totalStudents: cls?.totalStudents,
+      branch: cls?.branch,
+      semester: cls?.semester,
+      section: cls?.section,
+      subjectName: sub?.name,
+      subjectCode: sub?.code,
+    });
   };
 
   return (
